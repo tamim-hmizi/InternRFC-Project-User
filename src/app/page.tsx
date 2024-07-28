@@ -10,7 +10,6 @@ function ProjectCard({ project }) {
     imageUrl: '/images/ProjectLOGO2.png',
     imageAlt: 'LOGO project'
   };
-  const encodedId = encodeURIComponent(project.Ref);
  
 
   return (
@@ -37,7 +36,7 @@ function ProjectCard({ project }) {
         </Box>
         <Box>
           <Flex justify="flex-end" mt={2}>
-          <Link href={`/projetDetails/${encodedId}`} passHref>
+          <Link href={`/projetDetails/${project.Ref}`} passHref>
             <Button colorScheme='red' size='sm'>Voir les détails</Button>
             </Link>
           </Flex>
