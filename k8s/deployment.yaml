@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-user-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: InternRFC-app-project-user
+  template:
+    metadata:
+      labels:
+        app: InternRFC-app-project-user
+    spec:
+      containers:
+      - name: Project-User-container
+        image: 533267283761.dkr.ecr.eu-central-1.amazonaws.com/projet-user:latest
+        ports:
+        - containerPort: 3000
