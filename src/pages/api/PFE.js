@@ -5,7 +5,7 @@ const dynamoDB = new DynamoDB.DocumentClient();
 export default async function handler(req, res) {
   const { Domaine } = req.query;
 
-  console.log('Received Domaine:', Domaine); // Log du paramètre reçu
+  console.log('Received Domaine:', Domaine);
 
   const params = {
     TableName: 'PFEProjects',
@@ -15,14 +15,14 @@ export default async function handler(req, res) {
     },
   };
 
-  console.log('DynamoDB scan params:', params); // Log des paramètres du scan
+  console.log('DynamoDB scan params:', params);
 
   try {
     const data = await dynamoDB.scan(params).promise();
-    console.log('DynamoDB scan result:', data); // Log des résultats de la requête
+    console.log('DynamoDB scan result:', data);
     res.status(200).json(data.Items);
   } catch (error) {
-    console.error('Error fetching data:', error); // Log de l'erreur
+    console.error('Error fetching data:', error);
     res.status(500).json({ error: 'Error fetching data' });
   }
 }

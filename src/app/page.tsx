@@ -5,7 +5,19 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import BeatLoader from 'react-spinners/BeatLoader';
 import Link from 'next/link';
 
-function ProjectCard({ project }) {
+export interface Projet{
+  name: string;
+  description: string;
+  Sujet: string;
+  Ref: String;
+  imageUrl: string;
+  imageAlt?: string;
+}
+interface ProjectCardProps {
+  project: Projet;
+}
+
+function ProjectCard({ project }: ProjectCardProps) {
   const property = {
     imageUrl: '/images/ProjectLOGO2.png',
     imageAlt: 'LOGO project'
@@ -67,7 +79,7 @@ function Home() {
     }
   }, [selectedDomaine]);
 
-  const handleButtonClick = (domaine) => {
+  const handleButtonClick = (domaine:string) => {
     setSelectedDomaine(domaine);
   };
 
@@ -85,7 +97,7 @@ function Home() {
               </Flex>
             ) : (
               projects.length > 0 ? (
-                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} justify="center">
+                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
                   {projects.map((project, index) => (
                     <ProjectCard key={index} project={project} />
                   ))}
@@ -108,7 +120,7 @@ function Home() {
               </Flex>
             ) : (
               projects.length > 0 ? (
-                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} justify="center">
+                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
                   {projects.map((project, index) => (
                     <ProjectCard key={index} project={project} />
                   ))}
@@ -131,7 +143,7 @@ function Home() {
               </Flex>
             ) : (
               projects.length > 0 ? (
-                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} justify="center">
+                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
                   {projects.map((project, index) => (
                     <ProjectCard key={index} project={project} />
                   ))}
@@ -154,7 +166,7 @@ function Home() {
               </Flex>
             ) : (
               projects.length > 0 ? (
-                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4} justify="center">
+                <SimpleGrid columns={[1, 2, 3, 4]} spacing={4}>
                   {projects.map((project, index) => (
                     <ProjectCard key={index} project={project} />
                   ))}

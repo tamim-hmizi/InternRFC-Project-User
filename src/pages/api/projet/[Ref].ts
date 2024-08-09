@@ -1,8 +1,9 @@
 import { DynamoDB } from "aws-sdk";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 const dynamoDB = new DynamoDB.DocumentClient();
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { Ref } = req.query;
 
   console.log('Received Ref:', Ref);

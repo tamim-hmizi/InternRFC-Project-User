@@ -2,18 +2,28 @@ import { useState, useEffect , useRef} from 'react';
 import { useRouter } from 'next/router';
 import { Box, Heading, Text, Button, Input, VStack, useDisclosure, List, ListItem, Flex, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay  } from '@chakra-ui/react';
 import { BeatLoader } from 'react-spinners';
+import { RefObject } from 'react';
 
+export interface Projet {
+  Ref: string,
+    Sujet: string, 
+    Description: string, 
+    Objectifs: string[], 
+    Prerequis : string[]
+}
 const ProjectDetails = () => {
   const router = useRouter();
   const { Ref } = router.query;
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<Projet | null>(null);
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const cancelRef = useRef();
+  const cancelRef: RefObject<HTMLButtonElement> = useRef<HTMLButtonElement>(null);
+
+
 
   useEffect(() => {
     if (Ref) {
@@ -44,7 +54,6 @@ const ProjectDetails = () => {
     setError('');
     setIsSubmitting(true);
     try {
-      // Recherche dans la table WorkDemand
       const searchUrl = `/api/search?email=${email}&name=${name}`;
       const searchResponse = await fetch(searchUrl);
       const searchData = await searchResponse.json();
@@ -58,7 +67,7 @@ const ProjectDetails = () => {
         const postData = {
           id: email,
           name: name,
-          RefP: project.Ref,
+          RefP: project?.Ref,
         };
         const postResponse = await fetch(postUrl, {
           method: 'POST',
